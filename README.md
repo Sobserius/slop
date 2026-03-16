@@ -8,6 +8,7 @@ cp -r kitty ~/.config/
 cp -r mako ~/.config/
 cp -r waybar ~/.config/
 cp -r mango ~/.config/
+cp -r wallpaper.png ~/
 
 sudo rm -rf ~/slop
 ```
