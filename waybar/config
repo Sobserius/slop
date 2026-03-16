@@ -7,8 +7,8 @@
     "gtk-layer-shell": true,
     "passthrough": false,
     "modules-left": ["ext/workspaces", "dwl/window"],
-    "modules-center": ["tray"],
-    "modules-right": ["custom/keyboard", "pulseaudio", "network", "battery", "clock"],
+    "modules-center": [],
+    "modules-right": ["custom/keyboard", "pulseaudio", "network", "battery", "clock", "tray"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
