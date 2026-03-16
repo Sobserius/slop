@@ -40,7 +40,7 @@
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
         "interval": 1,
         "return-type": "text",
-        "on-click": "mangowc msg -d switch_layout"
+        "on-click": "xkb-switch -n"
     },
     "pulseaudio": {
         "format": "VOL: {volume}% ",
