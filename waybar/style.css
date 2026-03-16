@@ -54,7 +54,11 @@
     color: @subtext1;
     padding: 0 12px;
 }
-#custom-keyboard {
+#custom-keyboard,
+#network,
+#pulseaudio,
+#battery,
+#clock {
     color: @accent;
     padding: 0 12px;
     font-weight: 600;
