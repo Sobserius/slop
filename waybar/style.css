@@ -9,6 +9,7 @@
 @define-color red #f38ba8;
 @define-color yellow #f9e2af;
 @define-color green #a6e3a1;
+
 * {
     border: none;
     border-radius: 0;
@@ -18,13 +19,16 @@
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
 }
+
 #waybar {
     background: @waybar-bg;
     color: @foreground;
 }
+
 #workspaces {
     margin: 4px 8px;
 }
+
 #workspaces button {
     color: @subtext0;
     background: transparent;
@@ -34,24 +38,113 @@
     margin: 0 2px;
     transition: all 0.15s ease;
 }
+
 #workspaces button.active {
     background: @surface0;
     color: @lavender;
 }
+
 #workspaces button.visible {
     background: @surface1;
     color: @foreground;
 }
+
 #workspaces button.urgent {
     background: @red;
     color: @waybar-bg;
 }
+
 #workspaces button:hover {
     background: @surface1;
     color: @foreground;
 }
+
+
 #window {
     color: @subtext1;
-    padding: 0 12px;
+    padding: 4px 10px;
+    margin: 4px 8px;
 }
 
+
+#custom-keyboard,
+#pulseaudio,
+#network,
+#battery,
+#clock,
+#tray {
+    margin: 4px 8px;
+    padding: 4px 10px;
+    background: @surface0;
+    border-radius: 4px;
+    color: @foreground;
+    transition: background 0.15s ease;
+}
+
+
+#custom-keyboard:hover,
+#pulseaudio:hover,
+#network:hover,
+#battery:hover,
+#clock:hover,
+#tray:hover {
+    background: @surface1;
+}
+
+#pulseaudio.muted {
+    color: @subtext0;
+    background: @surface1;  
+}
+
+#pulseaudio.muted:hover {
+    background: @surface0;  
+}
+
+
+#network.disconnected {
+    color: @red;
+    background: @surface1;
+}
+
+#network.disconnected:hover {
+    background: @surface0;
+}
+
+
+#battery.warning {
+    color: @yellow;
+}
+
+#battery.critical {
+    color: @red;
+}
+
+#battery.charging {
+    color: @green;
+}
+
+
+#tray {
+    padding: 4px 6px;         
+}
+
+#tray menu {
+    background: @surface0;
+    border: 1px solid @surface1;
+    border-radius: 4px;
+    color: @foreground;
+}
+
+#tray menuitem:hover {
+    background: @surface1;
+}
+
+#tray > .passive {
+    opacity: 0.7;
+}
+
+#tray > .needs-attention {
+    background: @yellow;
+    color: @waybar-bg;
+    border-radius: 4px;
+}
