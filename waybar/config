@@ -38,7 +38,7 @@
         "format": "{}",
         "tooltip": false,
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
-        "interval": 1,
+        "interval": 0.5,
         "return-type": "text"
     },
     "pulseaudio": {
