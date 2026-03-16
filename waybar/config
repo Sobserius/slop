@@ -39,8 +39,7 @@
         "tooltip": false,
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
         "interval": 1,
-        "return-type": "text",
-        "on-click": "xkb-switch -n"
+        "return-type": "text"
     },
     "pulseaudio": {
         "format": "VOL: {volume}% ",
