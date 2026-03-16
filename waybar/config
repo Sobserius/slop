@@ -43,9 +43,9 @@
         "on-click": "mangowc msg -d switch_layout"
     },
     "pulseaudio": {
-        "format": "VOL: {volume}%",
-        "format-bluetooth": "VOL: {volume}%",
-        "format-bluetooth-muted": "VOL: MUTE",
+        "format": "VOL: {volume}% ",
+        "format-bluetooth": "VOL: {volume}% ",
+        "format-bluetooth-muted": "VOL: MUTE ",
         "format-muted": "VOL: MUTE",
         "format-source": " {volume}%",
         "format-source-muted": "MUTE",
@@ -54,26 +54,26 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "network": {
-        "format-wifi": "W: {essid} {signalStrength}%",
-        "format-ethernet": "E: {ipaddr}/{cidr}",
-        "format-linked": " {ifname} (No IP)",
-        "format-disconnected": "OFFLINE",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "format-wifi": "W: {essid} {signalStrength}% ",
+        "format-ethernet": "E: {ipaddr}/{cidr} ",
+        "format-linked": " {ifname} (No IP) ",
+        "format-disconnected": "OFFLINE ",
+        "format-alt": "{ifname}: {ipaddr}/{cidr} ",
         "interval": 5,
         "on-click": "nm-connection-editor"
     },
     "battery": {
-        "format": "BAT: {capacity}%",
-        "format-charging": "BAT: {capacity}% +",
-        "format-plugged": "BAT: {capacity}% AC",
+        "format": "BAT: {capacity}% ",
+        "format-charging": "BAT: {capacity}% ",
+        "format-plugged": "BAT: {capacity}% ",
         "format-alt": "{time} ",
         "tooltip-format": "{timeTo}, {capacity}%",
         "on-click": "powerprofilesctl gui"
     },
     "clock": {
         "tooltip": false,
-        "format": "{:%H:%M}",
-        "format-alt": "{:%e %b %Y}",
+        "format": "{:%H:%M} ",
+        "format-alt": "{:%e %b %Y} ",
         "interval": 60
     },
     "tray": {
