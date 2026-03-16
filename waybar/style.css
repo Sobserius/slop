@@ -25,9 +25,6 @@
     color: @foreground;
 }
 
-#workspaces {
-    margin: 4px 2px;
-}
 
 #workspaces button {
     color: @subtext0;
