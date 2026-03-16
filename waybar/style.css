@@ -25,6 +25,10 @@
     color: @foreground;
 }
 
+window#waybar {
+    border-bottom: 2px solid #89b4faff; 
+}
+
 
 #workspaces button {
     color: @subtext0;
