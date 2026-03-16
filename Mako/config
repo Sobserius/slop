@@ -1,0 +1,17 @@
+max-visible=5
+default-timeout=5000
+
+background-color=#1e1e2e
+text-color=#cdd6f4
+border-color=#45475a
+border-radius=12
+
+[urgency=low]
+background-color=#1e1e2e
+
+[urgency=normal]
+background-color=#1e1e2e
+
+[urgency=high]
+background-color=#1e1e2e
+text-color=#f38ba8
