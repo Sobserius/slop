@@ -11,9 +11,6 @@
     "modules-right": ["tray", "custom/keyboard", "pulseaudio", "network", "battery", "clock"],
     "ext/workspaces": {
         "format": "{icon}",
-        "persistent-workspaces": {
-            "*": 5 
-        },
         "format-icons": {
             "1": "1",
             "2": "2",
