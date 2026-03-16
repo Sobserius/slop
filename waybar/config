@@ -24,8 +24,6 @@
             "10": "10"
         },
         "ignore-hidden": true,
-        "on-click": "activate",
-        "on-click-right": "deactivate",
         "sort-by-id": true,
         "tooltip-format": "{name}"
     },
