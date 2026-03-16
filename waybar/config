@@ -23,6 +23,7 @@
             "9": "9",
             "10": "10"
         },
+        "on-click": "activate",
         "ignore-hidden": true,
         "sort-by-id": true,
         "tooltip-format": "{name}"
