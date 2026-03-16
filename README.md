@@ -10,5 +10,6 @@ cp -r waybar ~/.config/
 cp -r mango ~/.config/
 cp -r wallpaper.png ~/
 
+cd
 sudo rm -rf ~/slop
 ```
