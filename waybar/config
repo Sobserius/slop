@@ -24,7 +24,13 @@
             "10": "10"
         },
         "on-click": "activate",
-        "ignore-hidden": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+        },        
         "sort-by-id": true,
         "tooltip-format": "{name}"
     },
