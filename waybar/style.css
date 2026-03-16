@@ -54,15 +54,4 @@
     color: @subtext1;
     padding: 0 12px;
 }
-#custom-keyboard,
-#network,
-#pulseaudio,
-#battery,
-#clock {
-    color: @accent;
-    padding: 0 12px;
-    font-weight: 600;
-    background: @surface0;
-    border-radius: 4px;
-    margin-right: 4px;
-}
+
