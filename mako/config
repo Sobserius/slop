@@ -10,7 +10,7 @@ border-radius=12
 border-color=#89b4fa
 
 [urgency=normal]
-border-color=89b4fa
+border-color=#89b4fa
 
 [urgency=high]
 text-color=#f38ba8
