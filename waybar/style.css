@@ -28,12 +28,8 @@
 
 #workspaces button {
     color: @subtext0;
-    background: transparent;
-    border: none;
-    border-radius: 4px;
-    padding: 4px 10px;
-    margin: 0 2px;
-    transition: all 0.15s ease;
+    padding: 2px 6px;
+    margin: 0 0px;
 }
 
 #workspaces button.active {
@@ -59,7 +55,7 @@
 
 #window {
     color: @subtext1;
-    padding: 4px 10px;
+    padding: 2px 6px;
     margin: 4px 8px;
 }
 
@@ -70,54 +66,8 @@
 #battery,
 #clock,
 #tray {
-    margin: 0 2px;
-    padding: 4px 10px;
-    background: @surface0;
-    border-radius: 4px;
-    color: @foreground;
-    transition: background 0.15s ease;
-}
-
-
-#custom-keyboard:hover,
-#pulseaudio:hover,
-#network:hover,
-#battery:hover,
-#clock:hover,
-#tray:hover {
-    background: @surface1;
-}
-
-#pulseaudio.muted {
-    color: @subtext0;
-    background: @surface1;  
-}
-
-#pulseaudio.muted:hover {
-    background: @surface0;  
-}
-
-
-#network.disconnected {
-    color: @red;
-    background: @surface1;
-}
-
-#network.disconnected:hover {
-    background: @surface0;
-}
-
-
-#battery.warning {
-    color: @yellow;
-}
-
-#battery.critical {
-    color: @red;
-}
-
-#battery.charging {
-    color: @green;
+    margin: 0 0px;
+    padding: 2px 6px;
 }
 
 
@@ -126,22 +76,14 @@
 }
 
 #tray menu {
-    background: @surface0;
-    border: 1px solid @surface1;
-    border-radius: 4px;
     color: @foreground;
 }
 
-#tray menuitem:hover {
-    background: @surface1;
-}
 
 #tray > .passive {
     opacity: 0.7;
 }
 
 #tray > .needs-attention {
-    background: @yellow;
     color: @waybar-bg;
-    border-radius: 4px;
 }
