@@ -7,6 +7,8 @@
 @define-color accent #89b4fa;
 @define-color lavender #b4befe;
 @define-color red #f38ba8;
+@define-color pink #f5c2e7;
+@define-color mauve #cba6f7;
 @define-color yellow #f9e2af;
 @define-color green #a6e3a1;
 * {
@@ -23,13 +25,13 @@
     color: @foreground;
 }
 window#waybar {
-    border-bottom: 2px solid #89b4fa; 
+    border-bottom: 2px solid #89b4fa;
 }
 #workspaces button {
     color: @subtext0;
     padding: 2px 6px;
     margin: 0 0px;
-    border-bottom: 2px solid #89b4fa; 
+    border-bottom: 2px solid #89b4fa;
 }
 #workspaces button.active {
     background: @surface0;
@@ -60,9 +62,24 @@ window#waybar {
 #custom-keyboard {
     padding: 2px 6px;
 }
+#pulseaudio {
+    color: @red;
+}
+#network {
+    color: @pink;
+}
+#battery {
+    color: @green;
+}
+#clock {
+    color: @mauve;
+}
+#custom-keyboard {
+    color: @mauve;
+}
 #tray {
     color: #1e1e2e;
-    padding: 4px 6px;         
+    padding: 4px 6px;
 }
 #tray menu {
     color: @foreground;
