@@ -86,6 +86,7 @@ window#waybar {
 }
 #custom-power {
     color: @blue;
+}
 #tray {
     color: #1e1e2e;
     padding: 4px 6px;
