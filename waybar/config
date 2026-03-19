@@ -8,7 +8,7 @@
     "passthrough": false,
     "modules-left": ["ext/workspaces", "dwl/window"],
     "modules-center": [],
-    "modules-right": ["tray", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "battery", "clock"],
+    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
