@@ -8,7 +8,7 @@
     "passthrough": false,
     "modules-left": ["ext/workspaces", "dwl/window"],
     "modules-center": [],
-    "modules-right": ["tray", "custom/keyboard", "pulseaudio", "network", "battery", "clock"],
+    "modules-right": ["tray", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "battery", "clock"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
@@ -31,6 +31,13 @@
         "format": "{title}",
         "max-length": 50,
         "separate-outputs": true
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "CAF: ON", 
+            "deactivated": "CAF: OFF" 
+        }
     },
     "custom/keyboard": {
         "format": "{}",
