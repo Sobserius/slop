@@ -6,7 +6,7 @@
     "exclusive": true,
     "gtk-layer-shell": true,
     "passthrough": false,
-    "modules-left": ["custom/fuzzel", "ext/workspaces", "dwl/window"],
+    "modules-left": ["ext/workspaces", "dwl/window"],
     "modules-center": [],
     "modules-right": ["tray", "custom/keyboard", "pulseaudio", "network", "battery", "clock"],
     "ext/workspaces": {
@@ -31,11 +31,6 @@
         "format": "{title}",
         "max-length": 50,
         "separate-outputs": true
-    },
-    "custom/fuzzel": {
-        "format": "󰄛",
-        "on-click": "fuzzel",
-        "tooltip": false
     },
     "custom/keyboard": {
         "format": "{}",
