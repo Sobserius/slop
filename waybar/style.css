@@ -6,6 +6,7 @@
 @define-color subtext0 #a6adc8;
 @define-color accent #89b4fa;
 @define-color lavender #b4befe;
+@define-color peach #fab387;
 @define-color red #f38ba8;
 @define-color pink #f5c2e7;
 @define-color mauve #cba6f7;
@@ -79,7 +80,7 @@ window#waybar {
     color: @mauve;
 }
 #custom-keyboard {
-    color: @mauve;
+    color: @peach;
 }
 #tray {
     color: #1e1e2e;
