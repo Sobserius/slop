@@ -59,12 +59,12 @@ window#waybar {
 #pulseaudio,
 #battery,
 #network,
-#custom-keyboard
-#idle_inhibitor {
+#custom-keyboard {
     padding: 2px 6px;
 }
 #idle_inhibitor {
     color: @yellow 
+    padding: 4px 6px;
 }
 #pulseaudio {
     color: @red;
