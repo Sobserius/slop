@@ -52,39 +52,14 @@ window#waybar {
     padding: 2px 6px;
     margin: 4px 8px;
 }
+
+#custom-fuzzel,
+#clock,
+#pulseaudio,
+#battery,
+#network,
 #custom-keyboard {
-    background: #f5c2e7;
-    color: #1e1e2e;
-    border-bottom: 2px solid #89b4fa; 
     padding: 2px 6px;
-}
-#pulseaudio {
-    background: #fab387;
-    border-bottom: 2px solid #89b4fa; 
-    color: #1e1e2e;
-    padding: 2px 6px;
-}
-#network {
-    background: #89dceb;
-    color: #1e1e2e;
-    border-bottom: 2px solid #89b4fa; 
-    padding: 2px 6px;
-}
-#battery {
-    background: #a6e3a1;
-    color: #1e1e2e;
-    border-bottom: 2px solid #89b4fa; 
-    padding: 2px 6px;
-}
-#clock {
-    background: #b4befe;
-    color: #1e1e2e;
-    border-bottom: 2px solid #89b4fa; 
-    padding: 2px 6px;
-}
-#custom-fuzzel {
-    padding: 2px 6px;
-    border-bottom: 2px solid #89b4fa; 
 }
 #tray {
     color: #1e1e2e;
