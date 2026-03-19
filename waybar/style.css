@@ -73,13 +73,13 @@ window#waybar {
     color: @red;
 }
 #network {
-    color: @pink;
+    color: @mauve;
 }
 #battery {
     color: @green;
 }
 #clock {
-    color: @mauve;
+    color: @blue;
 }
 #custom-keyboard {
     color: @peach;
