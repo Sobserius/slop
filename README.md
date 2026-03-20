@@ -33,5 +33,5 @@ chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 # Gallery:
 
 March 20th:
-<img width="1919" height="1080" alt="image" src="https://github.com/user-attachments/assets/e25b1136-e372-4114-8f53-136dcc4e38de" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c79dc2e1-e3ba-4f51-8f06-7de6c85c7397" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e64537a-7994-44ed-a775-7cf85f3d78ae" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/957a4f7f-6f0e-4ce8-97e9-c79074351ece" />
