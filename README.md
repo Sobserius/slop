@@ -5,6 +5,9 @@ Dependencies:
 ```console
 sudo pacman -S kitty fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome
 ```
+``` console
+yay -S mangowm-git
+```
 
 # Dots installation:
 ```console
