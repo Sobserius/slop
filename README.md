@@ -1,6 +1,26 @@
+Dependencies:
+mango
+kitty
+fuzzel
+swaylock
+waybar
+swaybg
+swayidle
+mako
+grim
+slurp
+wl-clipboard
+libnotify
+xdg-desktop-portal
+xdg-desktop-portal-wlr
+polkit-gnome
 
+Install Dependencies:
+```console
+sudo pacman -S kitty fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome
+```
 
-Installation:
+Dots installation:
 ```console
 git clone https://github.com/Sobserius/slop.git
 
@@ -20,3 +40,5 @@ chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 ```
 
 To update, run the installation process and relogin.
+
+
