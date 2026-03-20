@@ -27,4 +27,7 @@ chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 > [!NOTE]
 > To update, run the installation process again and relogin.
 
+# Gallery:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/de46b96f-b8f5-4b68-90e9-a8c333de76a4" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/c9adcc0d-3520-49e1-80af-455eaec85065" />
 
