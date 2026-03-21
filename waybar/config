@@ -8,7 +8,7 @@
     "passthrough": false,
     "modules-left": ["ext/workspaces", "dwl/window"],
     "modules-center": ["custom/layout"],
-    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
+    "modules-right": ["tray", "battery", "idle_inhibitor",  "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
@@ -52,8 +52,6 @@
     "custom/keyboard": {
         "format": "{}",
         "tooltip": false,
-        "interval": "once",
-        "signal": 1,
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
         "return-type": "text"
     },
