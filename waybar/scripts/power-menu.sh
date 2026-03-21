@@ -3,6 +3,6 @@ CHOICE=$(echo -e "Shutdown\nReboot\nLogout\nLock" | fuzzel --dmenu --lines=4 --w
 case "$CHOICE" in
     Shutdown) systemctl poweroff ;;
     Reboot) systemctl reboot ;;
-    Logout) swaymsg exit ;;
+    Logout) mmsg -q ;;
     Lock) swaylock ;;
 esac
