@@ -73,7 +73,7 @@
         "format-disconnected": "OFFLINE",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "interval": 5,
-        "on-click": "nm-connection-editor"
+        "on-click": "kitty nmtui"
     },
     "battery": {
         "format": "BAT: {capacity}%",
@@ -81,7 +81,6 @@
         "format-plugged": "BAT: {capacity}%",
         "format-alt": "{time}",
         "tooltip-format": "{timeTo}, {capacity}%",
-        "on-click": "powerprofilesctl gui"
     },
     "clock": {
         "tooltip": false,
