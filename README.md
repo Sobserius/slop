@@ -23,6 +23,7 @@ sudo rm -rf ~/slop
 ```console
 chmod +x ~/.config/mango/screenshot.sh
 chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
+chmod +x ~/.config/waybar/scripts/power-menu.sh
 ```
 > [!NOTE]
 > To update, run the installation process again and relogin.
