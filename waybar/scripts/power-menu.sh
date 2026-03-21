@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-CHOICE=$(echo -e "Shutdown\nReboot\nLogout\nLock" | fuzzel --dmenu --lines=4 --width=14)
+CHOICE=$(echo -e "Shutdown\nReboot\nLogout\nLock" | fuzzel --dmenu --lines=4 --width=14 --prompt-only)
 case "$CHOICE" in
     Shutdown) systemctl poweroff ;;
     Reboot) systemctl reboot ;;
