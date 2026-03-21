@@ -28,13 +28,13 @@
     color: @foreground;
 }
 window#waybar {
-    border-bottom: 2px solid #89b4fa;
+    border-bottom: 2px solid @accent;
 }
 #workspaces button {
     color: @subtext0;
     padding: 2px 6px;
     margin: 0 0px;
-    border-bottom: 2px solid #89b4fa;
+    border-bottom: 2px solid @accent;
 }
 #workspaces button.active {
     background: @surface0;
@@ -52,7 +52,8 @@ window#waybar {
     background: @surface1;
     color: @foreground;
 }
-#window {
+#window,
+#custom-layout {
     color: @subtext1;
     padding: 2px 6px;
     margin: 4px 8px;
