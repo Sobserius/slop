@@ -52,6 +52,8 @@
     "custom/keyboard": {
         "format": "{}",
         "tooltip": false,
+        "interval": "once",
+        "signal": 1,
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
         "return-type": "text"
     },
