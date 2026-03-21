@@ -8,7 +8,7 @@
     "passthrough": false,
     "modules-left": ["ext/workspaces", "dwl/window"],
     "modules-center": [],
-    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock"],
+    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
@@ -35,8 +35,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "CAF: ON", 
-            "deactivated": "CAF: OFF" 
+            "activated": "CAF: ON",
+            "deactivated": "CAF: OFF"
         }
     },
     "custom/keyboard": {
@@ -84,5 +84,10 @@
         "icon-size": 16,
         "spacing": 10,
         "show-passive-popups": true
+    },
+    "custom/power": {
+        "format": "PWR",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/power-menu.sh"
     }
 }
