@@ -37,8 +37,7 @@
         "tooltip": false,
         "exec": "mmsg -g | grep 'layout' | awk '{print $3}'",
         "return-type": "text",
-        "interval": "once",
-        "signal": 1,
+        "interval": "1",
         "on-click": "~/.config/waybar/scripts/layout-menu.sh"
     },
     "idle_inhibitor": {
