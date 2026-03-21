@@ -1,7 +1,6 @@
 #!/bin/bash
 
-{ mmsg -g -k; mmsg -w -k; } | awk '{print $NF}' | while read -r LAYOUT; do
-    if [ -z "$LAYOUT" ]; then continue; fi
-    UPPER_LAYOUT=$(echo "$LAYOUT" | tr '[:lower:]' '[:upper:]')
-    echo "{\"text\": \"$UPPER_LAYOUT\", \"class\": \"$LAYOUT\"}"
+while true; do
+    mmsg -g -k 2>/dev/null | awk '{print $NF}' | tr '[:lower:]' '[:upper:]' || echo "US"
+    sleep 1
 done
