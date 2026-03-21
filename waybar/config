@@ -35,7 +35,7 @@
     "custom/layout": {
         "format": "{}",
         "exec": "mmsg -g | grep 'layout' | awk '{print $3}'",
-        "interval": 1,
+        "interval": 0.5,
         "return-type": "text",
         "on-click": "~/.config/waybar/scripts/layout-menu.sh"
     },
