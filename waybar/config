@@ -37,6 +37,8 @@
         "tooltip": false,
         "exec": "mmsg -g | grep 'layout' | awk '{print $3}'",
         "return-type": "text",
+        "interval": "once",
+        "signal": 1,
         "on-click": "~/.config/waybar/scripts/layout-menu.sh"
     },
     "idle_inhibitor": {
@@ -50,6 +52,8 @@
     "custom/keyboard": {
         "format": "{}",
         "tooltip": false,
+        "interval": "once",
+        "signal": 1,
         "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
         "return-type": "text"
     },
