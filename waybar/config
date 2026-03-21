@@ -34,8 +34,9 @@
     },
     "custom/layout": {
         "format": "{}",
-        "exec": "mmsg -g | awk '/^Layout:/{print $2}'",
+        "exec": "bash -c 'mmsg -g | grep Layout | awk \"{print $2}\"'",
         "interval": 1,
+        "return-type": "text",
         "on-click": "~/.config/waybar/scripts/layout-menu.sh"
     },
     "idle_inhibitor": {
