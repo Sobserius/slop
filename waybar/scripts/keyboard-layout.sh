@@ -1,6 +1,7 @@
 #!/bin/bash
-
+i=0
 while true; do
-    mmsg -g -k 2>/dev/null | awk '{print $NF}' | tr '[:lower:]' '[:upper:]' || echo "US"
-    mmsg -w -k > /dev/null
+    echo "$i"
+    i=$((i+1))
+    sleep 1
 done
