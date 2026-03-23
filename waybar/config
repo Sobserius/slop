@@ -67,11 +67,8 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "network": {
-        "format-wifi": "W: {essid} {signalStrength}%",
-        "format-ethernet": "E: {ipaddr}/{cidr}",
-        "format-linked": " {ifname} (No IP)",
+        "format-connected": "ONLINE",
         "format-disconnected": "OFFLINE",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
         "interval": 5,
         "on-click": "kitty nmtui"
     },
