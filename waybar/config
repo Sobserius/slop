@@ -67,7 +67,7 @@
         "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
     },
     "network": {
-        "format-connected": "ONLINE",
+        "format": "ONLINE",
         "format-disconnected": "OFFLINE",
         "interval": 5,
         "on-click": "kitty nmtui"
