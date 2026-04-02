@@ -1,5 +1,5 @@
 Dependencies:
-```mango kitty fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome```
+```mango kitty noto-fonts-emoji fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome```
 
 # Install Dependencies:
 ```console
