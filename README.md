@@ -1,9 +1,9 @@
 Dependencies:
-```mango kitty noto-fonts-emoji fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome```
+```mango kitty noto-fonts-emoji papirus-icons fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome```
 
 # Install Dependencies:
 ```console
-sudo pacman -S kitty noto-fonts-emoji fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome
+sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome
 ```
 ``` console
 yay -S mangowm-git
@@ -25,6 +25,7 @@ chmod +x ~/.config/mango/screenshot.sh
 chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 chmod +x ~/.config/waybar/scripts/power-menu.sh
 chmod +x ~/.config/waybar/scripts/layout-menu.sh
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 ```
 > [!NOTE]
 > To update, run the installation process again and relogin.
