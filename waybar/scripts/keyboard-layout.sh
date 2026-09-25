@@ -1,3 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-mmsg -g -k 2>/dev/null | awk '{print $NF}' | tr '[:lower:]' '[:upper:]' || echo "US"
+layout="$(mmsg get keyboardlayout 2>/dev/null | jq -r '.layout // empty' 2>/dev/null)" || layout=""
+
+case "$layout" in
+    English*|US*)
+        printf 'US\n'
+        ;;
+    Russian*|RU*)
+        printf 'RU\n'
+        ;;
+    '')
+        printf 'US\n'
+        ;;
+    *'('*')')
+        printf '%s\n' "${layout##*\(}" | sed 's/)//' | tr '[:lower:]' '[:upper:]'
+        ;;
+    *)
+        printf '%s\n' "$layout"
+        ;;
+esac

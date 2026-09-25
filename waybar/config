@@ -6,9 +6,9 @@
     "exclusive": true,
     "gtk-layer-shell": true,
     "passthrough": false,
-    "modules-left": ["ext/workspaces", "dwl/window"],
+    "modules-left": ["ext/workspaces", "custom/window"],
     "modules-center": ["custom/layout"],
-    "modules-right": ["tray", "battery", "idle_inhibitor",  "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
+    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
     "ext/workspaces": {
         "format": "{icon}",
         "format-icons": {
@@ -27,15 +27,18 @@
         "sort-by-id": true,
         "tooltip-format": "{name}"
     },
-    "dwl/window": {
-        "format": "{title}",
+    "custom/window": {
+        "format": "{}",
+        "exec": "~/.config/waybar/scripts/window-title.sh",
         "max-length": 50,
-        "separate-outputs": true
+        "interval": 1,
+        "return-type": "text",
+        "hide-empty-text": true
     },
-   "custom/layout": {
+    "custom/layout": {
         "format": "{}",
         "tooltip": false,
-        "exec": "mmsg -g -l | grep 'layout' | awk '{print $3}'",
+        "exec": "mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .layout_symbol'",
         "interval": 1,
         "return-type": "text",
         "on-click": "~/.config/waybar/scripts/layout-menu.sh"
@@ -56,11 +59,11 @@
         "return-type": "text"
     },
     "pulseaudio": {
-        "format": "VOL: {volume}%",
-        "format-bluetooth": "VOL: {volume}%",
-        "format-bluetooth-muted": "VOL: MUTE",
-        "format-muted": "VOL: MUTE",
-        "format-source": " {volume}%",
+        "format": "VOL {volume}%",
+        "format-bluetooth": "VOL {volume}%",
+        "format-bluetooth-muted": "VOL MUTE",
+        "format-muted": "VOL MUTE",
+        "format-source": "{volume}%",
         "format-source-muted": "MUTE",
         "on-click": "pavucontrol",
         "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+",
@@ -77,7 +80,7 @@
         "format-charging": "BAT: {capacity}%",
         "format-plugged": "BAT: {capacity}%",
         "format-alt": "{time}",
-        "tooltip-format": "{timeTo}, {capacity}%",
+        "tooltip-format": "{timeTo}, {capacity}%"
     },
     "clock": {
         "tooltip": false,
