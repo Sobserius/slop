@@ -26,6 +26,7 @@ chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 chmod +x ~/.config/waybar/scripts/power-menu.sh
 chmod +x ~/.config/waybar/scripts/layout-menu.sh
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 ```
 > [!NOTE]
 > To update, run the installation process again and relogin.
