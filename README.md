@@ -49,6 +49,12 @@ chmod +x ~/.config/waybar/scripts/layout-menu.sh
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
 ```
+
+## To make angles sharp:
+```console
+sed -i 's/^radius = .*/radius = 0/' ~/.config/fuzzel/fuzzel.ini; sed -i 's/^border-radius=.*/border-radius=0/' ~/.config/mako/config; makoctl reload
+```
+
 > [!NOTE]
 > To update, run the installation process again and relogin.
 
