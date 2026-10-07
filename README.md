@@ -28,6 +28,7 @@ cp -rf fuzzel kitty mako waybar sway swaylock ~/.config/
 cp -f wallpaper.png ~
 cd ~
 sudo rm -rf ~/slop
+sed -i 's/Logout) mmsg dispatch quit ;;/Logout) swaymsg exit ;;/' ~/.config/waybar/scripts/power-menu.sh
 ```
 
 # Post-installation:
