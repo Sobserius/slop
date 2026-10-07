@@ -9,7 +9,7 @@ set $up k
 set $right l
 
 font pango:Noto Sans Mono 10
-output * bg /home/sob/.config/sway/wallpaper.png fill
+output * bg /home/sob/wallpaper.png fill
 
 default_border pixel 2
 default_floating_border pixel 2
