@@ -29,6 +29,7 @@ cp -f wallpaper.png ~
 cd ~
 sudo rm -rf ~/slop
 sed -i 's/Logout) mmsg dispatch quit ;;/Logout) swaymsg exit ;;/' ~/.config/waybar/scripts/power-menu.sh
+f="$HOME/.config/waybar/config"; jq '."modules-center"=[] | ."modules-right"|=map(if .=="custom/keyboard" then "sway/language" else . end) | del(."custom/layout",."custom/keyboard") | ."sway/language"={"format":"{short}","tooltip":false}' "$f" > "$f.tmp" && mv "$f.tmp" "$f" && sed -i 's/#custom-keyboard/#language/g' "$HOME/.config/waybar/style.css" && pkill -USR2 waybar
 ```
 
 # Post-installation:
