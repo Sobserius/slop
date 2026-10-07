@@ -19,9 +19,30 @@ cd ~
 sudo rm -rf ~/slop
 ```
 
+### Or:
+
+```console
+git clone https://github.com/Sobserius/slop.git
+cd slop
+cp -rf fuzzel kitty mako waybar sway swaylock ~/.config/
+cp -f wallpaper.png ~
+cd ~
+sudo rm -rf ~/slop
+```
+
 # Post-installation:
 ```console
 chmod +x ~/.config/mango/screenshot.sh
+chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
+chmod +x ~/.config/waybar/scripts/power-menu.sh
+chmod +x ~/.config/waybar/scripts/layout-menu.sh
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+```
+### Or:
+
+```console
+chmod +x ~/.config/sway/scripts/screenshot.sh
 chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
 chmod +x ~/.config/waybar/scripts/power-menu.sh
 chmod +x ~/.config/waybar/scripts/layout-menu.sh
