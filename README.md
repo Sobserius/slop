@@ -29,6 +29,7 @@ cp -f wallpaper.png ~
 cd ~
 sudo rm -rf ~/slop
 sed -i 's/Logout) mmsg dispatch quit ;;/Logout) swaymsg exit ;;/' ~/.config/waybar/scripts/power-menu.sh
+jq '."ext/workspaces"["ignore-workspaces"] = ["1","2","3","4","5","6","7","8","9"]' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && pkill -USR2 waybar
 jq '."modules-center"=[] | ."modules-right" |= map(if . == "custom/keyboard" then "sway/language" else . end) | del(."custom/layout", ."custom/keyboard") | ."sway/language"={"format":"{short}","tooltip":false}' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#custom-keyboard/#language/g' ~/.config/waybar/style.css && pkill -USR2 waybar
 ```
 
