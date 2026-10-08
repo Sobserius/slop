@@ -29,7 +29,6 @@ cp -f wallpaper.png ~
 cd ~
 sudo rm -rf ~/slop
 jq '."modules-center"=[] | ."modules-right" |= map(if . == "custom/keyboard" then "sway/language" else . end) | del(."custom/layout", ."custom/keyboard") | ."sway/language"={"format":"{short}","tooltip":false}' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#custom-keyboard/#language/g' ~/.config/waybar/style.css && pkill -USR2 waybar
-jq '."modules-left" |= map(if . == "ext/workspaces" then "sway/workspaces" else . end) | ."sway/workspaces" = ((."ext/workspaces" // {}) + {"disable-scroll": true, "persistent-workspaces": (reduce range(1;10) as $n ({}; . + {($n|tostring): []}))}) | del(."ext/workspaces")' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#workspaces button.active/#workspaces button.focused/' ~/.config/waybar/style.css && pkill -USR2 waybar
 sed -i 's/^radius = .*/radius = 0/' ~/.config/fuzzel/fuzzel.ini; sed -i 's/^border-radius=.*/border-radius=0/' ~/.config/mako/config; makoctl reload
 ```
 
@@ -51,6 +50,7 @@ chmod +x ~/.config/waybar/scripts/power-menu.sh
 chmod +x ~/.config/waybar/scripts/layout-menu.sh
 gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+jq '."modules-left" |= map(if . == "ext/workspaces" then "sway/workspaces" else . end) | ."sway/workspaces" = ((."ext/workspaces" // {}) + {"disable-scroll": true, "persistent-workspaces": (reduce range(1;10) as $n ({}; . + {($n|tostring): []}))}) | del(."ext/workspaces")' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#workspaces button.active/#workspaces button.focused/' ~/.config/waybar/style.css && pkill -USR2 waybar
 ```
 
 
