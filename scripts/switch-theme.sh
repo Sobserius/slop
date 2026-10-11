@@ -27,7 +27,14 @@ STATE_FILE="$CACHE_DIR/theme"
 BIN_DIR="$HOME/.local/bin"
 
 die() { printf 'switch-theme: %s\n' "$*" >&2; exit 1; }
-info() { printf '  %s\n' "$*"; }
+
+# Every step also goes to the log, so when the THEME button is used we can still
+# see how far the run got, even if it dies half way through.
+LOG_FILE="$CACHE_DIR/switch.log"
+info() {
+    printf '  %s\n' "$*"
+    printf '%s  %s\n' "$(date +%H:%M:%S)" "$*" >>"$LOG_FILE" 2>/dev/null || true
+}
 
 active_theme() {
     local t
@@ -97,6 +104,8 @@ esac
 . "$REPO/$requested/theme.env"
 
 current="$(active_theme)"
+: >"$LOG_FILE" 2>/dev/null || true
+info "switch -> $requested (was $current, parent: $(ps -o comm= -p "$PPID" 2>/dev/null | tr -d ' ' || echo '?'))"
 if [ "$current" = "$requested" ]; then
     info "already on $requested - re-applying anyway"
 fi
@@ -144,7 +153,29 @@ if have gsettings; then
         info "gsettings: color-scheme not set"
 fi
 
+# Thunar and the other xfce apps are GTK3, and they read settings.ini from disk
+# with no change notification. GTK4 apps pick up the same keys on their own.
+gtk_settings() {
+    local dir="$1" file="$1/settings.ini" theme="$2" dark="$3"
+    mkdir -p "$dir"
+    [ -f "$file" ] || printf '[Settings]\n' >"$file"
+    sed -i -e '/^[[:space:]]*gtk-theme-name[[:space:]]*=/d' \
+        -e '/^[[:space:]]*gtk-application-prefer-dark-theme[[:space:]]*=/d' "$file"
+    sed -i "0,/^\[Settings\]/s//[Settings]\ngtk-theme-name = $theme\ngtk-application-prefer-dark-theme = $dark/" "$file"
+}
+
+gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK"
+gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK"
+
 # --- reload running services ---------------------------------------------------
+
+# kitty goes first: SIGUSR1 makes every running window re-read kitty.conf, which
+# pulls in the new theme.conf. Doing it before the waybar reload matters, because
+# when the THEME button fires this script it is a child of waybar, and reloading
+# waybar can take the rest of this script down with it.
+if pgrep -x kitty >/dev/null 2>&1; then
+    pkill -USR1 kitty && info "kitty rethemed"
+fi
 
 # Sway owns the wallpaper itself (`output ... bg`), so it restarts swaybg on its
 # own and there is never a second copy fighting for the screen. Anything that
@@ -165,15 +196,17 @@ elif [ -f "$wallpaper_dst" ] && have swaybg && [ -n "${WAYLAND_DISPLAY:-}" ]; th
     info "wallpaper set (no sway running, using swaybg directly)"
 fi
 
-if pgrep -x waybar >/dev/null 2>&1; then
-    pkill -USR2 waybar && info "waybar reloaded"
-fi
-
 if have makoctl; then
     makoctl reload >/dev/null 2>&1 && info "mako reloaded"
+fi
+
+# waybar last, it is the one that usually invoked us.
+if pgrep -x waybar >/dev/null 2>&1; then
+    pkill -USR2 waybar && info "waybar reloaded"
 fi
 
 # --- report --------------------------------------------------------------------
 
 printf 'slop theme -> %s  (%s)\n' "$requested" "$SLOP_LABEL"
 printf '  wallpaper: %s\n' "$wallpaper_dst"
+info "done ($requested)"
