@@ -146,20 +146,9 @@ fi
 
 # --- GTK / desktop ------------------------------------------------------------
 
-if have gsettings; then
-    gsettings set org.gnome.desktop.interface icon-theme "$SLOP_ICON_THEME" 2>/dev/null ||
-        info "gsettings: icon-theme not set (is $SLOP_ICON_THEME installed?)"
-    # GTK trusts this key over settings.ini, so it is what actually decides what
-    # running GTK windows look like.
-    gsettings set org.gnome.desktop.interface gtk-theme "$SLOP_GTK_THEME" 2>/dev/null ||
-        info "gsettings: gtk-theme not set (is $SLOP_GTK_THEME installed?)"
-    gsettings set org.gnome.desktop.interface color-scheme "$SLOP_COLOR_SCHEME" 2>/dev/null ||
-        info "gsettings: color-scheme not set"
-fi
-
-# Thunar and the other xfce apps are GTK3. gsettings alone changes the value but
-# running windows keep the icons they cached at startup, so the keys also go into
-# settings.ini, which GTK watches for changes. GTK4 apps pick it up by themselves.
+# gsettings is the live path: GTK watches these keys and re-themes without a
+# restart. settings.ini below is only the fallback, because on a dconf system
+# writing both makes GTK re-theme twice and you get a visible double blink.
 gtk_settings() {
     local dir="$1" file="$1/settings.ini" theme="$2" dark="$3" icons="$4"
     mkdir -p "$dir"
@@ -170,8 +159,19 @@ gtk_settings() {
     sed -i "0,/^\[Settings\]/s//[Settings]\ngtk-theme-name = $theme\ngtk-application-prefer-dark-theme = $dark\ngtk-icon-theme-name = $icons/" "$file"
 }
 
-gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
-gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+if have gsettings; then
+    # order matters: the window chrome changes first, then the icons that sit in
+    # it, so a repaint is never caught half way.
+    gsettings set org.gnome.desktop.interface color-scheme "$SLOP_COLOR_SCHEME" 2>/dev/null ||
+        info "gsettings: color-scheme not set"
+    gsettings set org.gnome.desktop.interface gtk-theme "$SLOP_GTK_THEME" 2>/dev/null ||
+        info "gsettings: gtk-theme not set (is $SLOP_GTK_THEME installed?)"
+    gsettings set org.gnome.desktop.interface icon-theme "$SLOP_ICON_THEME" 2>/dev/null ||
+        info "gsettings: icon-theme not set (is $SLOP_ICON_THEME installed?)"
+else
+    gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+    gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+fi
 
 # --- reload running services ---------------------------------------------------
 
@@ -183,18 +183,22 @@ if pgrep -x kitty >/dev/null 2>&1; then
     pkill -USR1 kitty && info "kitty rethemed"
 fi
 
-# Sway owns the wallpaper itself (`output ... bg`), so it restarts swaybg on its
-# own and there is never a second copy fighting for the screen. Anything that
-# does not understand swaymsg still gets one from the fallback below.
+# Sway owns the wallpaper (`output * bg` lives in theme.conf), so a successful
+# reload already applies it. Setting it by hand first as well would restart swaybg
+# twice and blink the desktop twice, so only do it if the reload did not happen.
 if sway_available; then
-    if [ -f "$wallpaper_dst" ]; then
-        swaymsg output '*' bg "$wallpaper_dst" fill >/dev/null 2>&1 ||
-            info "could not set the wallpaper on all outputs"
-    fi
+    reloaded=0
     if have sway && sway --validate -c "$CONFIG_DIR/sway/config" >/dev/null 2>&1; then
-        swaymsg reload >/dev/null 2>&1 && info "sway reloaded"
+        swaymsg reload >/dev/null 2>&1 && {
+            reloaded=1
+            info "sway reloaded"
+        }
     else
         info "sway config failed validation - NOT reloading (check $CONFIG_DIR/sway/config)"
+    fi
+    if [ "$reloaded" = 0 ] && [ -f "$wallpaper_dst" ]; then
+        swaymsg output '*' bg "$wallpaper_dst" fill >/dev/null 2>&1 &&
+            info "wallpaper set directly"
     fi
 elif [ -f "$wallpaper_dst" ] && have swaybg && [ -n "${WAYLAND_DISPLAY:-}" ]; then
     pkill -x swaybg 2>/dev/null
