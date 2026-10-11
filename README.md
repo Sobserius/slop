@@ -1,93 +1,58 @@
-# slop
+Dependencies: `mango kitty noto-fonts-emoji papirus-icons fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome jq`
 
-Sway/MangoWM dotfiles in two flavours: **dark** (Catppuccin Mocha) and **light**
-(Catppuccin Latte). One command flips between them, in the bar or on the
-keyboard.
-
+# Install Dependencies:
+```console
+sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome jq
 ```
-$ switch-theme light
-slop theme -> light  (Latte (light))
-  wallpaper: /home/sob/lallpaper.png
+```console
+yay -S mangowm-git
 ```
 
-## Layout
-
-```
-dark/     light/     everything that differs between the two themes
-  theme.env            wallpaper name, icon theme, colour scheme
-  wallpaper.png        dark mode wallpaper   -> ~/wallpaper.png
-  lallpaper.png        light mode wallpaper  -> ~/lallpaper.png
-  fuzzel/fuzzel.ini
-  kitty/theme.conf     the colours kitty.conf includes
-  mako/config
-  sway/theme.conf      client colours + wallpaper, sway config includes this
-  swaylock/config
-  waybar/style.css
-shared/               the same on both themes
-  kitty/kitty.conf     include theme.conf at the end
-  sway/config          include theme.conf near the top
-  waybar/config        the modules, including the DRK/LHT button
-  */scripts/          executable helpers
-scripts/
-  switch-theme.sh      the switcher
-  upload.sh            commit + push to GitHub
-mango/                MangoWM config (not theme aware)
+# Dots installation:
+```console
+git clone https://github.com/Sobserius/slop.git
+cd slop
+./scripts/switch-theme.sh dark
+cd ~
+relogin
 ```
 
-`~/.config` holds **symlinks** into this repo, so editing a file here changes
-your desktop on reload - there is no copy step and no install step.
+`~/.config` becomes symlinks into the repo, so edit the repo and it edits your
+desktop. whatever was in `~/.config` first gets moved to `<name>.slop-backup`.
 
-## Install
-
-```sh
-sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme fuzzel swaylock \
-                waybar swaybg swayidle mako grim slurp wl-clipboard libnotify \
-                xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome jq
-# MangoWM only:  yay -S mangowm-git
-
-git clone https://github.com/Sobserius/slop.git ~/slop
-~/slop/scripts/switch-theme.sh dark      # wires everything up, backs up the old files
-relogin                                     # so sway picks up the new config
+# Themes:
+`dark` is mocha, `light` is latte.
+```console
+switch-theme dark
+switch-theme light
+switch-theme toggle
+switch-theme status
 ```
 
-The first run moves whatever was already in `~/.config` aside as
-`<name>.slop-backup` - nothing is deleted, delete those once you are happy.
+the bar button `THEME` sits right of `PWR`, and `$mod+Shift+t` toggles too.
 
-## Themes
+waybar, swaylock, mako, fuzzel, kitty, sway borders, wallpaper and gsettings all
+follow. fuzzel and swaylock pick it up the next time they open.
 
-```sh
-switch-theme            # toggle
-switch-theme light      # Latte
-switch-theme dark       # Mocha
-switch-theme status     # what is active, and what the bar button will switch to
+wallpapers are `dark/wallpaper.png` and `light/lallpaper.png`, they end up as
+`~/wallpaper.png` and `~/lallpaper.png`.
+
+# Upload:
+```console
+./scripts/upload.sh
+```
+```console
+./scripts/upload.sh "message here"
 ```
 
-The bar button sits at the far right, after `PWR`. It reads `THEME` and
-toggles. `$mod+Shift+t` does the same thing from the keyboard.
+> [!NOTE]
+> To update, run `./scripts/upload.sh` and relogin.
 
-Switching changes waybar, swaylock, mako, fuzzel, kitty, the sway client
-colours, the wallpaper and the GTK icon/colour-scheme settings, then reloads
-what is running. Anything that only reads its config at startup (fuzzel,
-swaylock) picks it up next time you open it.
+# Gallery:
 
-If a switch ever needs undoing, `SLOP_REPO` points the script at a different
-checkout and the previous files are still sitting in `~/.config` as
-`*.slop-backup`.
+March 20th:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e64537a-7994-44ed-a775-7cf85f3d78ae" />
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/957a4f7f-6f0e-4ce8-97e9-c79074351ece" />
 
-## Upload
-
-```sh
-./scripts/upload.sh              # stage, commit, push
-./scripts/upload.sh "new wallpaper"   # with a message
-./scripts/upload.sh --dry-run    # show what would happen
-```
-
-It sets your git identity once if you have none, refuses to push if the remote
-moved ahead of you, and on the very first push explains how to authenticate -
-over HTTPS with a personal access token, or over SSH with a new key.
-
-## MangoWM
-
-`mango/` is kept as it was; it is not theme aware, so switching only affects the
-sway setup. On MangoWM the switcher still swaps the wallpaper and the GTK icon
-theme.
+October 8th:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fb41c073-0963-47f6-97b6-303a44f9b2ee" />
