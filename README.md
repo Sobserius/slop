@@ -10,12 +10,13 @@ yay -S mangowm-git
 
 # Dots installation:
 ```console
+cd ~
 git clone https://github.com/Sobserius/slop.git
 cd slop
 ./scripts/switch-theme.sh dark
-cd ~
-relogin
 ```
+
+then log out and back in, sway needs to read the new config.
 
 `~/.config` becomes symlinks into the repo, so edit the repo and it edits your
 desktop. whatever was in `~/.config` first gets moved to `<name>.slop-backup`.
@@ -46,7 +47,7 @@ wallpapers are `dark/wallpaper.png` and `light/lallpaper.png`, they end up as
 ```
 
 > [!NOTE]
-> To update, run `./scripts/upload.sh` and relogin.
+> To update, run `./scripts/upload.sh` and log out and back in.
 
 # Gallery:
 
