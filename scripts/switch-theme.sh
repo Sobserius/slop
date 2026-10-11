@@ -149,23 +149,29 @@ fi
 if have gsettings; then
     gsettings set org.gnome.desktop.interface icon-theme "$SLOP_ICON_THEME" 2>/dev/null ||
         info "gsettings: icon-theme not set (is $SLOP_ICON_THEME installed?)"
+    # GTK trusts this key over settings.ini, so it is what actually decides what
+    # running GTK windows look like.
+    gsettings set org.gnome.desktop.interface gtk-theme "$SLOP_GTK_THEME" 2>/dev/null ||
+        info "gsettings: gtk-theme not set (is $SLOP_GTK_THEME installed?)"
     gsettings set org.gnome.desktop.interface color-scheme "$SLOP_COLOR_SCHEME" 2>/dev/null ||
         info "gsettings: color-scheme not set"
 fi
 
-# Thunar and the other xfce apps are GTK3, and they read settings.ini from disk
-# with no change notification. GTK4 apps pick up the same keys on their own.
+# Thunar and the other xfce apps are GTK3. gsettings alone changes the value but
+# running windows keep the icons they cached at startup, so the keys also go into
+# settings.ini, which GTK watches for changes. GTK4 apps pick it up by themselves.
 gtk_settings() {
-    local dir="$1" file="$1/settings.ini" theme="$2" dark="$3"
+    local dir="$1" file="$1/settings.ini" theme="$2" dark="$3" icons="$4"
     mkdir -p "$dir"
     [ -f "$file" ] || printf '[Settings]\n' >"$file"
     sed -i -e '/^[[:space:]]*gtk-theme-name[[:space:]]*=/d' \
-        -e '/^[[:space:]]*gtk-application-prefer-dark-theme[[:space:]]*=/d' "$file"
-    sed -i "0,/^\[Settings\]/s//[Settings]\ngtk-theme-name = $theme\ngtk-application-prefer-dark-theme = $dark/" "$file"
+        -e '/^[[:space:]]*gtk-application-prefer-dark-theme[[:space:]]*=/d' \
+        -e '/^[[:space:]]*gtk-icon-theme-name[[:space:]]*=/d' "$file"
+    sed -i "0,/^\[Settings\]/s//[Settings]\ngtk-theme-name = $theme\ngtk-application-prefer-dark-theme = $dark\ngtk-icon-theme-name = $icons/" "$file"
 }
 
-gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK"
-gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK"
+gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
 
 # --- reload running services ---------------------------------------------------
 
