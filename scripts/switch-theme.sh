@@ -210,9 +210,11 @@ if have makoctl; then
     makoctl reload >/dev/null 2>&1 && info "mako reloaded"
 fi
 
-# waybar last, it is the one that usually invoked us.
-if pgrep -x waybar >/dev/null 2>&1; then
-    pkill -USR2 waybar && info "waybar reloaded"
+# waybar reloads style.css by itself (reload_style_on_change in its config), which
+# only repaints the bar. Signalling it here as well would re-theme it a second
+# time and blink twice, so this is only the fallback for when the watcher misses.
+if pgrep -x waybar >/dev/null 2>&1 && [ -n "${SLOP_FORCE_WAYBAR_RELOAD:-}" ]; then
+    pkill -USR2 waybar && info "waybar reloaded (forced)"
 fi
 
 # --- report --------------------------------------------------------------------
