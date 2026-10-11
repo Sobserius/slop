@@ -146,9 +146,10 @@ fi
 
 # --- GTK / desktop ------------------------------------------------------------
 
-# gsettings is the live path: GTK watches these keys and re-themes without a
-# restart. settings.ini below is only the fallback, because on a dconf system
-# writing both makes GTK re-theme twice and you get a visible double blink.
+# gsettings covers GTK4/libadwaita apps and the desktop. GTK3 is different: it
+# watches settings.ini for changes and re-themes when that file moves, and it
+# barely listens to the gsettings keys. Both have to be written or GTK3 windows
+# keep whatever theme they started with.
 gtk_settings() {
     local dir="$1" file="$1/settings.ini" theme="$2" dark="$3" icons="$4"
     mkdir -p "$dir"
@@ -159,6 +160,9 @@ gtk_settings() {
     sed -i "0,/^\[Settings\]/s//[Settings]\ngtk-theme-name = $theme\ngtk-application-prefer-dark-theme = $dark\ngtk-icon-theme-name = $icons/" "$file"
 }
 
+gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
+
 if have gsettings; then
     # order matters: the window chrome changes first, then the icons that sit in
     # it, so a repaint is never caught half way.
@@ -168,9 +172,6 @@ if have gsettings; then
         info "gsettings: gtk-theme not set (is $SLOP_GTK_THEME installed?)"
     gsettings set org.gnome.desktop.interface icon-theme "$SLOP_ICON_THEME" 2>/dev/null ||
         info "gsettings: icon-theme not set (is $SLOP_ICON_THEME installed?)"
-else
-    gtk_settings "$CONFIG_DIR/gtk-3.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
-    gtk_settings "$CONFIG_DIR/gtk-4.0" "$SLOP_GTK_THEME" "$SLOP_GTK_DARK" "$SLOP_ICON_THEME"
 fi
 
 # --- reload running services ---------------------------------------------------
