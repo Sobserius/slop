@@ -1,0 +1,109 @@
+/* slop - light theme (Catppuccin Latte, palette v1.8.0)
+   Every value below is an official Latte colour, mapped to the same role the
+   dark theme uses, so both bars carry the same information in the same hues. */
+@define-color waybar-bg #eff1f5;   /* base */
+@define-color surface0 #ccd0da;    /* surface0 */
+@define-color surface1 #bcc0cc;    /* surface1 */
+@define-color foreground #4c4f69;  /* text */
+@define-color subtext1 #5c5f77;    /* subtext1 */
+@define-color subtext0 #6c6f85;    /* subtext0 */
+@define-color accent #1e66f5;      /* blue */
+@define-color lavender #7287fd;    /* lavender */
+@define-color blue #1e66f5;        /* blue */
+@define-color peach #fe640b;       /* peach */
+@define-color red #d20f39;         /* red */
+@define-color maroon #e64553;      /* maroon */
+@define-color pink #ea76cb;        /* pink */
+@define-color mauve #8839ef;       /* mauve */
+@define-color yellow #df8e1d;      /* yellow */
+@define-color green #40a02b;       /* green */
+@define-color cyan #179299;        /* teal */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    font-family: "JetBrains Mono Nerd Font", "Noto Sans Mono", monospace;
+    font-size: 13px;
+}
+#waybar {
+    background: @waybar-bg;
+    color: @foreground;
+}
+window#waybar {
+    border-bottom: 2px solid @accent;
+}
+#workspaces button {
+    color: @subtext0;
+    padding: 2px 6px;
+    margin: 0 0px;
+    border-bottom: 2px solid @accent;
+}
+#workspaces button.focused {
+    background: @surface0;
+    color: @foreground;
+}
+#workspaces button.visible {
+    background: @surface1;
+    color: @foreground;
+}
+#workspaces button.urgent {
+    background: @red;
+    color: @waybar-bg;
+}
+#workspaces button:hover {
+    background: @surface1;
+    color: @foreground;
+}
+#custom-window,
+#custom-layout {
+    color: @subtext1;
+    padding: 2px 6px;
+    margin: 4px 8px;
+}
+#custom-power,
+#custom-theme,
+#clock,
+#pulseaudio,
+#battery,
+#network,
+#language {
+    padding: 2px 6px;
+}
+#idle_inhibitor {
+    color: @yellow;
+    padding: 4px 6px;
+}
+#pulseaudio {
+    color: @maroon;
+}
+#network {
+    color: @mauve;
+}
+#battery {
+    color: @green;
+}
+#clock {
+    color: @blue;
+}
+#language {
+    color: @peach;
+}
+#custom-power {
+    color: @cyan;
+}
+/* Theme switch button - deliberately grey, it is chrome, not status. */
+#custom-theme {
+    color: @subtext0;
+}
+#custom-theme:hover {
+    color: @foreground;
+}
+#tray {
+    color: @foreground;
+    padding: 4px 6px;
+}
+#tray menu {
+    color: @foreground;
+}

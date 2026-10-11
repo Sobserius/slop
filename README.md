@@ -1,68 +1,93 @@
-Dependencies:
-```mango kitty noto-fonts-emoji papirus-icons fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome```
+# slop
 
-# Install Dependencies:
-```console
-sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme fuzzel swaylock waybar swaybg swayidle mako grim slurp wl-clipboard libnotify xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome
-```
-``` console
-yay -S mangowm-git
-```
+Sway/MangoWM dotfiles in two flavours: **dark** (Catppuccin Mocha) and **light**
+(Catppuccin Latte). One command flips between them, in the bar or on the
+keyboard.
 
-# Dots installation:
-```console
-git clone https://github.com/Sobserius/slop.git
-cd slop
-cp -rf fuzzel kitty mako waybar mango swaylock ~/.config/
-cp -f wallpaper.png ~
-cd ~
-sudo rm -rf ~/slop
+```
+$ switch-theme light
+slop theme -> light  (Latte (light))
+  wallpaper: /home/sob/lallpaper.png
 ```
 
-### Or:
+## Layout
 
-```console
-git clone https://github.com/Sobserius/slop.git
-cd slop
-cp -rf fuzzel kitty mako waybar sway swaylock ~/.config/
-cp -f wallpaper.png ~
-cd ~
-sudo rm -rf ~/slop
-jq '."modules-center"=[] | ."modules-right" |= map(if . == "custom/keyboard" then "sway/language" else . end) | del(."custom/layout", ."custom/keyboard") | ."sway/language"={"format":"{short}","tooltip":false}' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#custom-keyboard/#language/g' ~/.config/waybar/style.css && pkill -USR2 waybar
-sed -i 's/^radius = .*/radius = 0/' ~/.config/fuzzel/fuzzel.ini; sed -i 's/^border-radius=.*/border-radius=0/' ~/.config/mako/config; makoctl reload
+```
+dark/     light/     everything that differs between the two themes
+  theme.env            wallpaper name, icon theme, colour scheme
+  wallpaper.png        dark mode wallpaper   -> ~/wallpaper.png
+  lallpaper.png        light mode wallpaper  -> ~/lallpaper.png
+  fuzzel/fuzzel.ini
+  kitty/theme.conf     the colours kitty.conf includes
+  mako/config
+  sway/theme.conf      client colours + wallpaper, sway config includes this
+  swaylock/config
+  waybar/style.css
+shared/               the same on both themes
+  kitty/kitty.conf     include theme.conf at the end
+  sway/config          include theme.conf near the top
+  waybar/config        the modules, including the DRK/LHT button
+  */scripts/          executable helpers
+scripts/
+  switch-theme.sh      the switcher
+  upload.sh            commit + push to GitHub
+mango/                MangoWM config (not theme aware)
 ```
 
-# Post-installation:
-```console
-chmod +x ~/.config/mango/screenshot.sh
-chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
-chmod +x ~/.config/waybar/scripts/power-menu.sh
-chmod +x ~/.config/waybar/scripts/layout-menu.sh
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-```
-### Or:
+`~/.config` holds **symlinks** into this repo, so editing a file here changes
+your desktop on reload - there is no copy step and no install step.
 
-```console
-chmod +x ~/.config/sway/scripts/screenshot.sh
-chmod +x ~/.config/waybar/scripts/keyboard-layout.sh
-chmod +x ~/.config/waybar/scripts/power-menu.sh
-chmod +x ~/.config/waybar/scripts/layout-menu.sh
-gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
-jq '."modules-left" |= map(if . == "ext/workspaces" then "sway/workspaces" else . end) | ."sway/workspaces" = ((."ext/workspaces" // {}) + {"disable-scroll": true, "persistent-workspaces": (reduce range(1;10) as $n ({}; . + {($n|tostring): []}))}) | del(."ext/workspaces")' ~/.config/waybar/config > ~/.config/waybar/config.tmp && mv ~/.config/waybar/config.tmp ~/.config/waybar/config && sed -i 's/#workspaces button.active/#workspaces button.focused/' ~/.config/waybar/style.css && pkill -USR2 waybar
+## Install
+
+```sh
+sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme fuzzel swaylock \
+                waybar swaybg swayidle mako grim slurp wl-clipboard libnotify \
+                xdg-desktop-portal xdg-desktop-portal-wlr polkit-gnome jq
+# MangoWM only:  yay -S mangowm-git
+
+git clone https://github.com/Sobserius/slop.git ~/slop
+~/slop/scripts/switch-theme.sh dark      # wires everything up, backs up the old files
+relogin                                     # so sway picks up the new config
 ```
 
+The first run moves whatever was already in `~/.config` aside as
+`<name>.slop-backup` - nothing is deleted, delete those once you are happy.
 
-> [!NOTE]
-> To update, run the installation process again and relogin.
+## Themes
 
-# Gallery:
+```sh
+switch-theme            # toggle
+switch-theme light      # Latte
+switch-theme dark       # Mocha
+switch-theme status     # what is active, and what the bar button will switch to
+```
 
-March 20th:
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e64537a-7994-44ed-a775-7cf85f3d78ae" />
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/957a4f7f-6f0e-4ce8-97e9-c79074351ece" />
+The bar button sits at the far right, after `PWR`. It reads `THEME` and
+toggles. `$mod+Shift+t` does the same thing from the keyboard.
 
-October 8th:
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fb41c073-0963-47f6-97b6-303a44f9b2ee" />
+Switching changes waybar, swaylock, mako, fuzzel, kitty, the sway client
+colours, the wallpaper and the GTK icon/colour-scheme settings, then reloads
+what is running. Anything that only reads its config at startup (fuzzel,
+swaylock) picks it up next time you open it.
 
+If a switch ever needs undoing, `SLOP_REPO` points the script at a different
+checkout and the previous files are still sitting in `~/.config` as
+`*.slop-backup`.
+
+## Upload
+
+```sh
+./scripts/upload.sh              # stage, commit, push
+./scripts/upload.sh "new wallpaper"   # with a message
+./scripts/upload.sh --dry-run    # show what would happen
+```
+
+It sets your git identity once if you have none, refuses to push if the remote
+moved ahead of you, and on the very first push explains how to authenticate -
+over HTTPS with a personal access token, or over SSH with a new key.
+
+## MangoWM
+
+`mango/` is kept as it was; it is not theme aware, so switching only affects the
+sway setup. On MangoWM the switcher still swaps the wallpaper and the GTK icon
+theme.

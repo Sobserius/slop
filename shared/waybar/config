@@ -6,10 +6,10 @@
     "exclusive": true,
     "gtk-layer-shell": true,
     "passthrough": false,
-    "modules-left": ["ext/workspaces", "custom/window"],
-    "modules-center": ["custom/layout"],
-    "modules-right": ["tray", "battery", "idle_inhibitor", "custom/keyboard", "pulseaudio", "network", "clock", "custom/power"],
-    "ext/workspaces": {
+    "modules-left": ["sway/workspaces", "custom/window"],
+    "modules-center": [],
+    "modules-right": ["tray", "battery", "idle_inhibitor", "sway/language", "pulseaudio", "network", "clock", "custom/power", "custom/theme"],
+    "sway/workspaces": {
         "format": "{icon}",
         "format-icons": {
             "1": "1",
@@ -25,7 +25,19 @@
         },
         "on-click": "activate",
         "sort-by-id": true,
-        "tooltip-format": "{name}"
+        "tooltip-format": "{name}",
+        "disable-scroll": true,
+        "persistent-workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": []
+        }
     },
     "custom/window": {
         "format": "{}",
@@ -35,14 +47,6 @@
         "return-type": "text",
         "hide-empty-text": true
     },
-    "custom/layout": {
-        "format": "{}",
-        "tooltip": false,
-        "exec": "mmsg get all-monitors | jq -r '.monitors[] | select(.active == true) | .layout_symbol'",
-        "interval": 1,
-        "return-type": "text",
-        "on-click": "~/.config/waybar/scripts/layout-menu.sh"
-    },
     "idle_inhibitor": {
         "format": "{icon}",
         "tooltip": false,
@@ -50,13 +54,6 @@
             "activated": "CAF: ON",
             "deactivated": "CAF: OFF"
         }
-    },
-    "custom/keyboard": {
-        "format": "{}",
-        "tooltip": false,
-        "exec": "~/.config/waybar/scripts/keyboard-layout.sh",
-        "interval": 1,
-        "return-type": "text"
     },
     "pulseaudio": {
         "format": "VOL {volume}%",
@@ -93,9 +90,18 @@
         "spacing": 10,
         "show-passive-popups": true
     },
+    "custom/theme": {
+        "format": "THEME",
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/switch-theme.sh toggle"
+    },
     "custom/power": {
         "format": "PWR",
         "tooltip": false,
         "on-click": "~/.config/waybar/scripts/power-menu.sh"
+    },
+    "sway/language": {
+        "format": "{short}",
+        "tooltip": false
     }
 }

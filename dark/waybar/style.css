@@ -36,7 +36,7 @@ window#waybar {
     margin: 0 0px;
     border-bottom: 2px solid @accent;
 }
-#workspaces button.active {
+#workspaces button.focused {
     background: @surface0;
     color: @lavender;
 }
@@ -58,12 +58,13 @@ window#waybar {
     padding: 2px 6px;
     margin: 4px 8px;
 }
+#custom-theme,
 #custom-power,
 #clock,
 #pulseaudio,
 #battery,
 #network,
-#custom-keyboard {
+#language {
     padding: 2px 6px;
 }
 #idle_inhibitor {
@@ -82,11 +83,18 @@ window#waybar {
 #clock {
     color: @blue;
 }
-#custom-keyboard {
+#language {
     color: @peach;
 }
 #custom-power {
     color: @cyan;
+}
+/* Theme switch button - deliberately grey, it is chrome, not status. */
+#custom-theme {
+    color: @subtext0;
+}
+#custom-theme:hover {
+    color: @foreground;
 }
 #tray {
     color: #ffffff;
