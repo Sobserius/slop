@@ -48,14 +48,14 @@ wallpapers are `dark/wallpaper.png` and `light/lallpaper.png`, they end up as
 
 # Gallery:
 
-March 20th:
+### March 20th:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e64537a-7994-44ed-a775-7cf85f3d78ae" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/957a4f7f-6f0e-4ce8-97e9-c79074351ece" />
 
-October 8th:
+### October 8th:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/fb41c073-0963-47f6-97b6-303a44f9b2ee" />
 
-October 11th:
+### October 11th:
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/4f784b3d-60f7-4d9e-97cc-7dae7a7a447d" />
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/ea7459f3-58ad-4593-9312-768e4ca92eb0" />
 
