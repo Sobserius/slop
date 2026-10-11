@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-layout="$(mmsg get keyboardlayout 2>/dev/null | jq -r '.layout // empty' 2>/dev/null)" || layout=""
+layout="$(swaymsg -t get_inputs 2>/dev/null | jq -r '[.[] | select(.xkb_active_layout_name)] | .[0].xkb_active_layout_name // empty' 2>/dev/null)" || layout=""
 
 case "$layout" in
     English*|US*)
