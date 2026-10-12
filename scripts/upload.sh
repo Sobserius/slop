@@ -112,17 +112,29 @@ fi
 git fetch -q "$REMOTE" "$BRANCH" 2>/dev/null || true
 LOCAL="$(git rev-parse HEAD)"
 REMOTE_SHA="$(git rev-parse "$REMOTE/$BRANCH" 2>/dev/null || true)"
-BEHIND=0
-if [ -n "$REMOTE_SHA" ]; then
-    BEHIND="$(git rev-list --count "$REMOTE_SHA..HEAD")"
-    if [ "$(git rev-list --count "HEAD..$REMOTE_SHA")" -gt 0 ]; then
-        c_warn "remote has commits you do not have - pull first:"
-        c_warn "  git pull --rebase $REMOTE $BRANCH"
+
+if [ -n "$REMOTE_SHA" ] && [ "$(git rev-list --count "HEAD..$REMOTE_SHA")" -gt 0 ]; then
+    # Local work is already committed at this point, so the tree is clean and a
+    # rebase is safe. Do it here instead of making the user remember the order.
+    step "rebase"
+    c_warn "remote has commits you do not have - rebasing onto $REMOTE/$BRANCH"
+    if git pull --rebase -q "$REMOTE" "$BRANCH" 2>&1; then
+        c_ok "rebased onto $REMOTE/$BRANCH, now at $(git rev-parse --short HEAD)"
+    else
+        c_err "rebase hit a conflict, resolve it then run this again:"
+        c_err "  git status              # see what is conflicted"
+        c_err "  git rebase --continue   # after fixing each file"
+        c_err "  git rebase --abort      # to back out and start over"
         exit 1
     fi
 fi
 
-if [ "$BEHIND" = 0 ] && [ -n "$REMOTE_SHA" ] && [ "$LOCAL" = "$REMOTE_SHA" ]; then
+BEHIND=0
+if [ -n "$REMOTE_SHA" ]; then
+    BEHIND="$(git rev-list --count "$REMOTE_SHA..HEAD")"
+fi
+
+if [ "$BEHIND" = 0 ] && [ -n "$REMOTE_SHA" ] && [ "$(git rev-parse HEAD)" = "$REMOTE_SHA" ]; then
     c_ok "already up to date on $REMOTE/$BRANCH"
     printf '\n\033[32mnothing to upload.\033[0m\n\n'
     exit 0
