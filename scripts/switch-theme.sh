@@ -198,12 +198,12 @@ if sway_available; then
         info "sway config failed validation - NOT reloading (check $CONFIG_DIR/sway/config)"
     fi
     if [ "$reloaded" = 0 ] && [ -f "$wallpaper_dst" ]; then
-        swaymsg output '*' bg "$wallpaper_dst" fill >/dev/null 2>&1 &&
+        swaymsg output '*' bg "$wallpaper_dst" stretch >/dev/null 2>&1 &&
             info "wallpaper set directly"
     fi
 elif [ -f "$wallpaper_dst" ] && have swaybg && [ -n "${WAYLAND_DISPLAY:-}" ]; then
     pkill -x swaybg 2>/dev/null
-    setsid swaybg -o '*' -i "$wallpaper_dst" -m fill >/dev/null 2>&1 &
+    setsid swaybg -o '*' -i "$wallpaper_dst" -m stretch >/dev/null 2>&1 &
     info "wallpaper set (no sway running, using swaybg directly)"
 fi
 
