@@ -8,10 +8,13 @@ sudo pacman -S kitty noto-fonts-emoji papirus-icon-theme adw-gtk-theme fuzzel sw
 # Dots installation:
 ```console
 cd ~
-git clone https://github.com/Sobserius/slop.git
+[ -d slop ] && git -C slop pull || git clone https://github.com/Sobserius/slop.git
 cd slop
 ./scripts/switch-theme.sh dark
 ```
+
+that line pulls if `~/slop` is already there and clones if it is not, so updating an
+existing setup and installing fresh are the same command.
 
 then log out and back in, sway needs to read the new config.
 

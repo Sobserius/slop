@@ -1,0 +1,23 @@
+{
+  "logo": {
+    "type": "small",
+    "padding": {
+      "right": 2
+    }
+  },
+  "display": {
+    "separator": " ➔  "
+  },
+  "modules": [
+    "title",
+    "separator",
+    "os",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "memory",
+    "break",
+    "colors"
+  ]
+}
